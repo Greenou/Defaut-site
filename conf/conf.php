@@ -1,16 +1,15 @@
 <?php 
-session_start();
 	// LOCAL
 	if($_SERVER['SERVER_ADDR']=="127.0.0.1"){
 		$host = "localhost";
-    	$user = "zarctus";
-    	$passwd = "fs73aw65";
+    	$user = "";
+    	$passwd = "";
     	$db = ""; // A MODIFIER
 	}else{
 	// DISTANT
 		$host = "localhost:3307";
-        $user = "root";
-        $passwd = "fs73aw65";
+        $user = "";
+        $passwd = "";
         $db = ""; // A MODIFER
 	}
 

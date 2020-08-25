@@ -36,55 +36,6 @@ function changedatehusfr($datehus)
 }
 // DATE US en FR
 
-// CONNEXION	
-	function is_logged(){
-		if(session_status() == PHP_SESSION_NONE){
-			session_start();
-		}
-		if(!isset($_SESSION['auth'])){
-			$_SESSION['flash']['danger']['connexion'] = "Vous avez été déconnecté !";
-			header('Location: login.php');
-			exit();
-		}
-	}
-// CONNEXION
-
-// COOKIES
-	function reconnect_cookie(){
-		if(session_status() == PHP_SESSION_NONE){
-			session_start();
-		}
-		if(!isset($pdo)){
-			global $pdo;
-		}
-		if(isset($_COOKIE['remember']) && !isset($_SESSION['auth'])){
-			$remember_token = $_COOKIE['remember'];
-			$parts = explode('==', $remember_token);
-			$user_id = $parts[0];
-			$req = $pdo->prepare('SELECT * FROM users WHERE id = ?');
-			$req->execute([$user_id]);
-			$user = $req->fetch();
-			if($user){
-				$expected = $user_id . '==' . $user->remember_token . sha1($user_id . 'ZaYu');
-				if($expected == $remember_token){
-					session_start();
-					$_SESSION['auth'] = $user;
-					setcookie('remember', $remember_token, time() + 60 *60 * 24 * 7);
-				}else{
-					setcookie('remember', NULL, -1);
-				}
-			}else{
-				setcookie('remember', NULL, -1);
-			}
-			}
-		}
-// COOKIES
-
-// RANDOM POUR CONNEXION
-	function str_random($length){
-		$alphabet = "0123456789azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN";
-		return substr(str_shuffle(str_repeat($alphabet, $length)), 0, $length);
-	}
 
 
 // FORMATAGE DES NOMBRES
@@ -116,81 +67,6 @@ function montant($montant){
 	return $fmt->formatCurrency($montant, "EUR")."\n";
 }
 
-function get_total_all_records()
-{
-	// LOCAL
-	if($_SERVER['SERVER_ADDR']=="127.0.0.1"){
-		$host = "localhost";
-    	$user = "zarctus";
-    	$passwd = "fs73aw65";
-    	$db = "yuza";
-	}else{
-	// DISTANT
-		$host = "localhost:3307";
-        $user = "root";
-        $passwd = "fs73aw65";
-        $db = "yuza";
-
-	}
-
-	$pdo = new PDO('mysql:host='.$host.';dbname='.$db, $user, $passwd);
-	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-
-
-	
-	$statement = $pdo->prepare("SELECT * FROM operations");
-	$statement->execute();
-	$result = $statement->fetchAll();
-	return $statement->rowCount();
-}
-
-function arianne($nav){
-	switch ($nav) {
-    case "oper":
-    	echo "<li class='breadcrumb-item'>Nos comptes</li>";
-        echo "<li class='breadcrumb-item active'>Les opérations</li>";
-        break;
-    case "prev":
-        echo "<li class='breadcrumb-item'>Nos comptes</li>";
-        echo "<li class='breadcrumb-item active'>Les prévisions</li>";
-        break;
-    case "epar":
-        echo "<li class='breadcrumb-item'>Nos comptes</li>";
-        echo "<li class='breadcrumb-item active'>Epargnes</li>";
-        break;
-    case "livr":
-        echo "<li class='breadcrumb-item'>Nos comptes</li>";
-        echo "<li class='breadcrumb-item active'>Livret A</li>";
-        break;
-    case "grap":
-        echo "<li class='breadcrumb-item'>Nos comptes</li>";
-        echo "<li class='breadcrumb-item active'>Graph. Alimentations</li>";
-        break;
-    case "char":
-        echo "<li class='breadcrumb-item'>Nos comptes</li>";
-        echo "<li class='breadcrumb-item'><a href='?p=operations'>Les opérations</a></li>";
-        echo "<li class='breadcrumb-item active'>Graphiques</li>";
-        break;
-    case "cour":
-        echo "<li class='breadcrumb-item'>Logement</li>";
-        echo "<li class='breadcrumb-item active'>Les courses</li>";
-        break;
-    case "edf":
-        echo "<li class='breadcrumb-item'>Logement</li>";
-        echo "<li class='breadcrumb-item active'>EDF</li>";
-        break;
-    case "suiv":
-        echo "<li class='breadcrumb-item'>Divers</li>";
-        echo "<li class='breadcrumb-item active'>Suivi de colis</li>";
-        break;
-    case "ygg":
-        echo "<li class='breadcrumb-item'>Divers</li>";
-        echo "<li class='breadcrumb-item active'>YggTorrent</li>";
-        break;
-
-}
-}
 // RANDOM URL
 function randomPassword() {
     $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
