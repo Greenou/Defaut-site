@@ -1,19 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-	    <meta charset="UTF-8">
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    <title>Titre du document</title>
-	    <!-- FRED -->
-	    <link href="css/bootstrap.css" rel="stylesheet">
-		<link href="css/fred.css" rel="stylesheet">
-	</head>
-	<body>
-	    
-	    
-	    <!-- FOOTER -->
-	    <script src="//code.jquery.com/jquery-3.5.1.js"></script>
-	    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	</body>
-</html>
+<?php
+	//FICHIERS CONFIG
+	require_once 'conf/conf.php';
+	require_once 'conf/fonctions.php';
+
+	// HEADER
+	include_once 'templates/header.php';
+
+	// INCLUSION DE TOUTES LES AUTRES PAGES DU SITE
+	if(isset($_GET['p']) AND file_exists('./pages/'.$_GET['p'].'.php'))
+        {
+            include './pages/'.$_GET['p'].'.php';
+        }
+        else{
+           	include './pages/index.php';
+        }
+
+	// FOOTER
+	include_once 'templates/footer.php';
+?>
