@@ -2,15 +2,15 @@
 	// LOCAL
 	if($_SERVER['SERVER_ADDR']=="127.0.0.1"){
 		$host = "localhost";
-    	$user = "zarctus";
-    	$passwd = "fs73aw65";
-    	$db = "global";
+    	$user = "";
+    	$passwd = "";
+    	$db = "";
 	}else{
 	// DISTANT
 		$host = "localhost:3307";
-        $user = "root";
-        $passwd = "fs73aw65";
-        $db = "global";
+        $user = "";
+        $passwd = "";
+        $db = "";
 	}
 
 	$pdo = new PDO('mysql:host='.$host.';dbname='.$db, $user, $passwd);
