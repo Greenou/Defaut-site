@@ -4,4 +4,3 @@
 .gitattributes export-ignore
 .gitignore export-ignore
 # Fichier de config
-conf/conf.php export-ignore
