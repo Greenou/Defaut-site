@@ -22,17 +22,17 @@
 // ENCODAGE DES CARACTERES
 
 // DATE US en FR
-function changedateusfr($dateus) 
-{ 
-	$datefr=$dateus{8}.$dateus{9}."/".$dateus{5}.$dateus{6}."/".$dateus{2}.$dateus{3}; 
-	return $datefr; 
+function changedateusfr($dateus)
+{
+    $datefr = $dateus[8] . $dateus[9] . "/" . $dateus[5] . $dateus[6] . "/" . $dateus[2] . $dateus[3];
+    return $datefr;
 }
 // DATE US en FR
 // DATE US en FR
-function changedatehusfr($datehus) 
-{ 
-	$datehfr=$datehus{8}.$datehus{9}."/".$datehus{5}.$datehus{6}."/".$datehus{2}.$datehus{3}." à ".$datehus{11}.$datehus{12}.":".$datehus{14}.$datehus{15}; 
-	return $datehfr; 
+function changedatehusfr($datehus)
+{
+    $datehfr = $datehus[8] . $datehus[9] . "/" . $datehus[5] . $datehus[6] . "/" . $datehus[2] . $datehus[3] . " à " . $datehus[11] . $datehus[12] . ":" . $datehus[14] . $datehus[15];
+    return $datehfr;
 }
 // DATE US en FR
 
